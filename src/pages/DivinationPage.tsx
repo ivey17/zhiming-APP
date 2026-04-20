@@ -1,13 +1,27 @@
 import { Send, Languages, Sparkles, RotateCcw, User, Loader2 } from 'lucide-react';
 import { motion, useAnimation, AnimatePresence } from 'motion/react';
 import { useState, useRef, useEffect } from 'react';
-import { interpretHexagram } from '../services/geminiService';
 import { askDivinationAI } from '../services/aiService';
 import { cn } from '../lib/utils';
 
 interface Message {
   role: 'user' | 'ai';
   content: string;
+}
+
+function buildHexagramPrompt(lines: number[]) {
+  const lineDescriptions = lines
+    .map((line) => {
+      if (line === 6) return '老阴（动）';
+      if (line === 7) return '少阳';
+      if (line === 8) return '少阴';
+      if (line === 9) return '老阳（动）';
+      return '';
+    })
+    .reverse()
+    .join('、');
+
+  return `我起卦的六爻结果（从初爻到上爻）为：${lineDescriptions}。请给出简洁专业的卦象解读，包含卦名、核心含义、当前趋势和3条具体建议，总字数控制在250字内。`;
 }
 
 export default function DivinationPage() {
@@ -51,8 +65,8 @@ export default function DivinationPage() {
     
     setIsInterpreting(true);
     try {
-      const result = await interpretHexagram(fixedLines);
-      setInterpretation(result);
+      const response = await askDivinationAI(buildHexagramPrompt(fixedLines), { lines: fixedLines });
+      setInterpretation(response.content);
     } catch (e) {
       setInterpretation("（天机暂晦）解读因异象受阻，请复起一卦。");
     }
