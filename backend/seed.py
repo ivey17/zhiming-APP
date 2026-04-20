@@ -1,7 +1,7 @@
 import json
 import datetime
 import uuid
-from core.database import supabase
+from backend.core.database import supabase
 
 def seed_data():
     # 1. 获取一个用户

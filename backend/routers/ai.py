@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from google import genai
-from core.config import settings
-from core.security import get_current_user
-from core.database import supabase
+from backend.core.config import settings
+from backend.core.security import get_current_user
+from backend.core.database import supabase
 import json
 from datetime import datetime
 

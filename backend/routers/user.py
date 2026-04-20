@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
-from core.security import get_current_user, CurrentUser
-from core.database import supabase
+from backend.core.security import get_current_user, CurrentUser
+from backend.core.database import supabase
 
 router = APIRouter()
 

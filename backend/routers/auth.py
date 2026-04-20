@@ -2,8 +2,8 @@ import uuid
 from datetime import datetime
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from core.database import supabase
-from core.security import get_password_hash, verify_password, create_access_token
+from backend.core.database import supabase
+from backend.core.security import get_password_hash, verify_password, create_access_token
 
 router = APIRouter()
 

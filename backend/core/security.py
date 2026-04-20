@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from fastapi import Depends, HTTPException, Header
 from pydantic import BaseModel
 from passlib.context import CryptContext
-from core.config import settings
+from backend.core.config import settings
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
